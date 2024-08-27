@@ -1,6 +1,19 @@
-export const DeleteButton = () => {
+import { useTodoContext } from '../../lib/hooks'
+import { TodoType } from '../../lib/types'
+
+interface Props {
+  id: TodoType['id']
+}
+export const DeleteButton = ({ id }: Props) => {
+  const { deleteTodo } = useTodoContext()
   return (
-    <button className="text-red-400 hover:text-red-300">
+    <button
+      className="text-red-400 hover:text-red-300"
+      onClick={(e) => {
+        e.stopPropagation()
+        deleteTodo(id)
+      }}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
